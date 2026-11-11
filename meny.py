@@ -4,7 +4,6 @@ from kontroller import check_server, check_all_servers
 VALID_ENVIRONMENTS = ["dev", "test", "prod"]
 
 def find_server(servers, namn):
-    """"Return the server with this namn, or None if it does not exist"""
     for server in servers:
         if server["namn"].lower() == namn.lower():
             return server
@@ -52,7 +51,7 @@ def add_server(servers, data_file):
 
     while True:
         environment = input("Environment (dev/test/prod): ").strip().lower()
-        if environment in VALID_ENVIRONMENTS:
+        if environment  in VALID_ENVIRONMENTS:
             break
         print("Invalid environment. Enter dev, test, or prod.")
 
