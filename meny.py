@@ -1,14 +1,14 @@
 from lagring import save_servers, export_csv
 from kontroller import check_server, check_all_servers
 
-VALID_ENVIRONMENT ["dev", "test", "prod"]
+VALID_ENVIRONMENTS = ["dev", "test", "prod"]
 
 def find_server(servers, namn):
     """"Return the server with this namn, or None if it does not exist"""
     for server in servers:
-        if server["namn"] == namn.lower():
+        if server["namn"].lower() == namn.lower():
             return server
-        return None
+    return None
 
 def display_servers(servers, environment=None, search_text=None):
     filtered_servers = servers
@@ -20,7 +20,7 @@ def display_servers(servers, environment=None, search_text=None):
         filtered_servers = [
             server for server in filtered_servers
             if search_text in server['namn'].lower()
-            or search_text in server['address'].lower()
+            or search_text in server['adress'].lower()
         ]
 
     if not filtered_servers:
@@ -52,7 +52,7 @@ def add_server(servers, data_file):
 
     while True:
         environment = input("Environment (dev/test/prod): ").strip().lower()
-        if environment  in VALID_ENVIRONMENTS:
+        if environment in VALID_ENVIRONMENTS:
             break
         print("Invalid environment. Enter dev, test, or prod.")
 
@@ -101,7 +101,7 @@ def run_menu(servers, data_file):
             display_servers(servers)
         elif choice == "2":
             environment = input("Environment (dev/test/prod): ").strip().lower()
-            if environment not in VALID_ENVIRONMENT:
+            if environment not in VALID_ENVIRONMENTS:
                 print("Invalid environment.")
             else:
                 display_servers(servers, environment=environment)

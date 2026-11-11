@@ -8,7 +8,7 @@ def check_server(server):
 
     try:
         result = subprocess.run(
-            ["ping", "-c", "1", "-W", timeout, server["address"]],
+            ["ping", "-c", "1", "-W", timeout, server["adress"]],
             capture_output=True,
             text=True,
             timeout=int(timeout) + 2,
@@ -18,7 +18,7 @@ def check_server(server):
     except (subprocess.TimeoutExpired, FileNotFoundError, ValueError):
         server["status"] = "down"
 
-    server["last-checked"] = datetime.now(). strftime("%Y-%m-%d %H:%M:%S")
+    server["senast_kontrollerad"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return server["status"]
 
 def check_all_servers(servers):

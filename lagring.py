@@ -7,7 +7,7 @@ from pathlib import Path
 
 def get_data_file():
     """Read the data-file path from the environment, with a default."""
-    return Path(os.getenv("INVENTORY_DATAFIL", "server.json.py"))
+    return Path(os.getenv("INVENTORY_DATA_FILE", "server.json.py"))
 
 def load_servers(data_file):
     """Load servers from JSON. Return an empty list if the file is missing."""
@@ -42,7 +42,7 @@ def export_csv(servers):
     fieldnames = [
         "namn", "adress", "miljo", "roll", "status", "senast_kontrollerad"
     ]
-    with reports_path.open8("w", newline="", encoding="utf-8") as file:
+    with reports_path.open("w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(servers)
