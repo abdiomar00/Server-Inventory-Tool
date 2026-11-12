@@ -1,7 +1,5 @@
 # Server-Inventory-Tool
 
-# Server Inventory Tool
-
 ## 1. Introduktion
 
 Server Inventory Tool är ett Python-program som används för att hantera, organisera och övervaka servrar i olika miljöer.
