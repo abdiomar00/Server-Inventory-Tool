@@ -3,7 +3,7 @@ import subprocess
 from datetime import datetime
 
 def check_server(server):
-    """Ping a server and uppdate its status and last-checked timestamp."""
+    """Ping a server and update its status and last-checked timestamp."""
     timeout = os.getenv("INVENTORY_PING_TIMEOUT", "3")
 
     try:
