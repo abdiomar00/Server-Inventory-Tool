@@ -1,4 +1,4 @@
-# Server-Inventory-Tool
+# Server Inventory Tool
 
 ## 1. Introduktion
 
@@ -66,37 +66,10 @@ Programmet använder standardbibliotek från Python, bland annat:
 - `os` för att hantera miljövariabler och sökvägar.
 - `datetime` för att registrera datum och tid.
 
-## 4. Installation och förberedelser
-
-### 4.1 Kontrollera Python
-
-Öppna terminalen och kontrollera att Python är installerat:
-
-```bash
-python3 --version
-```
-
-Om Python är korrekt installerat visas versionsnumret.
-
-### 4.2 Öppna projektmappen
-
-Gå till katalogen där projektet finns:
-
-```bash
-cd server-inventory-tool
-```
-
-Kontrollera att projektets filer finns:
-
-```bash
-ls
-```
-
-### 4.3 Kontrollera projektets filer
+### 4 Kontrollera projektets filer
 
 Projektet ska innehålla följande filer:
 
-```text
 server-inventory-tool/
 │
 ├── main.py
@@ -107,7 +80,6 @@ server-inventory-tool/
 ├── reports/
 ├── .gitignore
 └── README.md
-```
 
 Mappen `reports` skapas automatiskt när en CSV-rapport exporteras om den inte redan finns.
 
@@ -130,10 +102,8 @@ Den ansvarar för att:
 
 Filen innehåller även:
 
-```python
 if __name__ == "__main__":
     main()
-```
 
 Detta gör att huvudfunktionen körs när filen startas direkt.
 
@@ -174,15 +144,11 @@ JSON används eftersom formatet är enkelt att läsa, skriva och hantera med Pyt
 
 Modulen använder:
 
-```python
 subprocess.run()
-```
 
 för att köra Linux-kommandot:
 
-```bash
 ping -c 1 SERVER_ADDRESS
-```
 
 Flaggan `-c 1` innebär att ett ping-paket skickas.
 
@@ -208,7 +174,6 @@ Varje server innehåller följande fält:
 
 Exempel på serverinformation:
 
-```json
 [
     {
         "namn": "web01",
@@ -219,7 +184,6 @@ Exempel på serverinformation:
         "senast_kontrollerad": null
     }
 ]
-```
 
 Om JSON-filen inte finns när programmet startas ska programmet börja med en tom serverlista.
 
@@ -241,9 +205,7 @@ Det första är det interaktiva läget. Det används när programmet startas uta
 
 Starta programmet med:
 
-```bash
 python3 main.py
-```
 
 Programmet visar då en meny där användaren kan välja mellan olika alternativ.
 
@@ -321,11 +283,9 @@ När exportfunktionen körs:
 
 Exempel på rapportmapp:
 
-```text
 reports/
 ├── inventory_2026-11-12_1030.csv
 └── inventory_2026-11-12_1145.csv
-```
 
 På så sätt kan flera rapporter sparas utan att tidigare rapporter skrivs över.
 
