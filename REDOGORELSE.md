@@ -1,52 +1,35 @@
-# Redogörelse
+Välj tre olika konstruktioner i koden, till exempel ett villkor, en loop och en funktion med parametrar och return. Förklara hur syntaxen fungerar och vad koden gör.
 
-## Tre konstruktioner i koden
+*Villkor* I `meny.py`, funktionen `find_server(servers, namn)`, används en for-loop för att gå igenom servrarna. Villkoret `if server["namn"].lower() == namn.lower()` jämför namnen utan att skilja på stora och små bokstäver. Om namnet matchar returneras serverns dictionary, annars returneras `None`.
 
-### Villkor
+*Loop* I `meny.py`, funktionen `run_menu(servers, data_file)`, används `while True` för att visa menyn igen. När användaren väljer alternativ 8 avslutar `break` loopen.
 
-I `meny.py` använder `find_server(servers, namn)` en `for`-loop för att gå igenom servrarna. Villkoret `if server["namn"].lower() == namn.lower()` jämför namnen utan att skilja på stora och små bokstäver. Funktionen returnerar serverns dictionary vid träff och `None` om ingen server hittas.
+*Funktion med parametrar och returvärde* I `kontroller.py` tar funktionen `check_server(server)` emot en server-dictionary, gör pingkontrollen, uppdaterar serverns status och tid för senaste kontroll och returnerar statusen `up` eller `down`.
 
-### Loop
+Varför passar en lista med dictionaries för att lagra servrarna? Vilka datatyper har värdena i en server?
 
-I `meny.py` använder `run_menu(servers, data_file)` en `while True`-loop för att visa menyn om och om igen. `break` avslutar loopen när användaren väljer alternativ 8. De andra valen anropar funktioner för att visa, lägga till, ta bort, kontrollera eller exportera servrar.
+En lista passar eftersom programmet hanterar flera servrar och behöver kunna gå igenom dem. Varje dictionary samlar egenskaper för en server under tydliga nycklar. Värdena `namn`, `adress`, `miljo`, `roll`, `status` och `senast_kontrollerad` är strängar. `senast_kontrollerad` är en tom sträng innan servern har kontrollerats.
 
-### Funktion med parametrar och returvärde
+Varför sparar du data i JSON men exporterar rapporten som CSV?
 
-I `kontroller.py` tar `check_server(server)` emot en servers dictionary. Funktionen kör `ping` med `subprocess.run`, uppdaterar fälten `status` och `senast_kontrollerad` och returnerar statusen `up` eller `down`.
+JSON används för den löpande lagringen eftersom det kan representera en lista med dictionaries och läsas in igen av Python. CSV passar för rapporter eftersom informationen sparas i tabellformat och kan öppnas i exempelvis kalkylprogram. Funktionen `export_csv` skriver serverns namn, adress, miljö, roll, status och senaste kontrolltid till en CSV-fil i mappen `reports`.
 
-## Varför passar en lista med dictionaries för servrarna? Vilka datatyper har värdena?
+Hur är programmet uppdelat i moduler och funktioner? Vilket ansvar har varje fil?
 
-En lista passar eftersom programmet hanterar flera servrar och behöver kunna gå igenom dem. Varje dictionary samlar fälten för en server under nycklar. Värdena `namn`, `adress`, `miljo`, `roll`, `status` och `senast_kontrollerad` är strängar. Innan servern kontrollerats är `senast_kontrollerad` en tom sträng.
+`main.py` startar programmet, läser kommandoradsargument med `argparse`, laddar serverlistan och anropar funktioner från de andra modulerna. `meny.py` ansvarar för textmenyn och funktioner för att hitta, visa, lägga till och ta bort servrar. `lagring.py` läser och sparar JSON samt exporterar CSV. `kontroller.py` utför pingkontroller och uppdaterar serverns status och kontrolltid. `server.json.py` innehåller exempeldata i JSON-format.
 
-## Varför sparas data i JSON men exporteras rapporten som CSV?
+Vilka moduler från standardbiblioteket använder du och till vad?
 
-JSON passar för programmets löpande lagring eftersom det kan spara listan av dictionaries och läsas in igen av Python. CSV är praktiskt för rapporter eftersom det är tabellformat och kan öppnas eller bearbetas i exempelvis kalkylprogram. `export_csv` skapar mappen `reports` vid behov och skriver fälten `namn`, `adress`, `miljo`, `roll`, `status` och `senast_kontrollerad` till en ny CSV-fil.
+`pathlib` används i `lagring.py` för sökvägar och kataloger. `json` läser och skriver serverdata. `csv` skapar rapporter. `datetime` skapar tidsstämplar för kontroller och rapportfilnamn. `subprocess` kör pingkommandot. `os` läser miljövariabler för datafilens sökväg och pingens timeout. `argparse` läser kommandoradsargument och `sys` skickar programmets avslutningskod till operativsystemet.
 
-## Hur är programmet uppdelat i moduler och funktioner?
+Ge tre exempel på god praxis från din kod och förklara varför de är bra.
 
-- `main.py` läser kommandoradsargument med `argparse`, laddar serverlistan och anropar meny-, kontroll- och lagringsfunktioner.
-- `meny.py` innehåller den interaktiva menyn samt funktioner för att hitta, visa, lägga till och ta bort servrar.
-- `lagring.py` väljer sökväg till datafilen, läser och sparar JSON samt exporterar CSV.
-- `kontroller.py` kör pingkontroller och uppdaterar status och tid för senaste kontroll.
-- `server.json.py` innehåller exempeldata i JSON-format.
+*Beskrivande namn* Funktioner som `check_server()` och `export_csv()` visar vad de gör.
 
-## Vilka moduler från standardbiblioteket används och till vad?
+*En uppgift per modul* Lagring, pingkontroller och meny ligger i olika filer. Det gör koden lättare att förstå och ändra.
 
-- `argparse` läser kommandoradsargument i `main.py`.
-- `sys` skickar programmets avslutningskod till operativsystemet.
-- `json` läser och skriver serverlistan.
-- `csv` skriver CSV-rapporter.
-- `os` läser miljövariabler för datafilens sökväg och pingens timeout.
-- `pathlib` hanterar sökvägar och skapar kataloger.
-- `datetime` skapar tidpunkten för senaste kontroll och tidsstämpeln i rapportfilens namn.
-- `subprocess` kör systemkommandot `ping`.
+*Återanvändning* Både meny och kommandoradsgränssnitt använder kontrollfunktionerna från `kontroller.py`, därför behöver pinglogiken bara underhållas på ett ställe.
 
-## Tre exempel på god praxis
-
-- **Beskrivande namn:** `check_server` och `export_csv` gör funktionernas uppgifter tydliga.
-- **Uppdelning i moduler:** meny, lagring och pingkontroller ligger i separata filer, vilket gör koden enklare att hitta och ändra.
-- **Återanvändning:** både menyn och kommandoradsgränssnittet använder kontrollfunktionerna i `kontroller.py`, så pinglogiken finns på ett ställe.
-
-## Vilka källor och hjälpmedel har använts och till vad?
+Vilka källor och hjälpmedel har du använt och till vad? Det kan till exempel vara kursboken, dokumentation, forum eller AI-verktyg.
 
 Jag har använt kursmaterial och lektionsanteckningar, AI, YouTube och W3Schools som hjälp för att förstå Python och programmets funktioner.
