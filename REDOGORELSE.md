@@ -32,4 +32,4 @@ Ge tre exempel på god praxis från din kod och förklara varför de är bra.
 
 Vilka källor och hjälpmedel har du använt och till vad? Det kan till exempel vara kursboken, dokumentation, forum eller AI-verktyg.
 
-Jag har använt kursmaterial och lektionsanteckningar, AI, YouTube och W3Schools som hjälp för att förstå Python och programmets funktioner.
+Jag har använt kursmaterial och lektionsanteckningar, AI-verktyg, YouTube och W3Schools som hjälp för att förstå Python och programmets funktioner.
