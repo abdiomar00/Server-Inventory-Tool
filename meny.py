@@ -57,7 +57,7 @@ def add_server(servers, data_file):
 
     servers.append({
         "namn": name,
-        "adres": address,
+        "adress": address,
         "miljo": environment,
         "roll": role,
         "status": "unknown",

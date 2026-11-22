@@ -36,7 +36,7 @@ def export_csv(servers):
     reports_directory = Path("reports")
     reports_directory.mkdir(parents=True, exist_ok=True)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     reports_path = reports_directory / f"inventory_{timestamp}.csv"
 
     fieldnames = [

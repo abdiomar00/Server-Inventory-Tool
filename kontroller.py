@@ -18,7 +18,7 @@ def check_server(server):
     except (subprocess.TimeoutExpired, FileNotFoundError, ValueError):
         server["status"] = "down"
 
-    server["senast_kontrollerad"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    server["senast_kontrollerad"] = datetime.now().strftime("%Y-%m-%d %H:%M")
     return server["status"]
 
 def check_all_servers(servers):
